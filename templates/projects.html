@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Projects · AWS BetterOps Agent{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Projects</h1>
+    <p class="subtitle">Each project is a deployed system BetterOps can investigate.</p>
+  </div>
+  <button class="btn btn-primary" id="new-project-button" type="button">New project</button>
+</div>
+
+<form class="panel form-panel" id="project-form" hidden novalidate>
+  <h2>New project</h2>
+  <div class="field-grid">
+    <div class="field">
+      <label for="project-name">Name</label>
+      <input id="project-name" name="name" type="text" required placeholder="Checkout Platform">
+    </div>
+    <div class="field">
+      <label for="project-key">Key</label>
+      <input id="project-key" name="key" type="text" required placeholder="CHECKOUT">
+      <p class="hint">Uppercase letters, numbers, - and _. Unique in your organization.</p>
+    </div>
+    <div class="field">
+      <label for="project-service">Primary service <span class="hint">(optional)</span></label>
+      <input id="project-service" name="primary_service" type="text" placeholder="checkout-service">
+    </div>
+    <div class="field">
+      <label for="project-repo">Repository URL <span class="hint">(optional)</span></label>
+      <input id="project-repo" name="repository_url" type="url" placeholder="https://github.com/acme/checkout">
+    </div>
+    <div class="field field-wide">
+      <label for="project-description">Description <span class="hint">(optional)</span></label>
+      <textarea id="project-description" name="description" rows="3"></textarea>
+    </div>
+  </div>
+  <p class="form-error" id="project-form-error" hidden></p>
+  <div class="form-actions">
+    <button class="btn btn-ghost" type="button" id="project-cancel">Cancel</button>
+    <button class="btn btn-primary" type="submit">Create project</button>
+  </div>
+</form>
+
+<section class="panel">
+  <div id="project-list" class="loading">Loading…</div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/projects.js') }}"></script>
+{% endblock %}

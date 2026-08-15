@@ -1,0 +1,19 @@
+# AWS BetterOps Agent — dependencies for Phase 0 and Phase 1 only.
+# Later phases add their own (see implementation_plan.md "Dependency introduction schedule").
+
+Flask==3.0.3
+SQLAlchemy==2.0.35
+alembic==1.13.3
+psycopg[binary]==3.2.3
+pydantic[email]==2.9.2
+PyJWT==2.9.0
+python-dotenv==1.0.1
+
+# Phase 2 — cache, rate limiting, distributed locks
+redis==5.2.0
+
+# Testing
+pytest==8.3.3
+# Runs the real redis-py client against an in-process server, so RedisBackend is
+# exercised command-for-command without needing a Redis instance in CI.
+fakeredis==2.26.1

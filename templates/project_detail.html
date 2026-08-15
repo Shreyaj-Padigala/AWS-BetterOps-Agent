@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Project · AWS BetterOps Agent{% endblock %}
+
+{% block content %}
+<div class="breadcrumb">
+  <a href="{{ url_for('pages.projects_page') }}">Projects</a> <span>/</span>
+  <span id="crumb-project">…</span>
+</div>
+
+<div class="page-header">
+  <div>
+    <h1 id="project-name">Loading…</h1>
+    <p class="subtitle" id="project-meta"></p>
+  </div>
+  <button class="btn btn-primary" id="new-incident-button" type="button">Report incident</button>
+</div>
+
+<section class="panel" id="project-summary"></section>
+
+<form class="panel form-panel" id="incident-form" hidden novalidate>
+  <h2>Report an incident</h2>
+  <div class="field-grid">
+    <div class="field field-wide">
+      <label for="incident-title">Title</label>
+      <input id="incident-title" name="title" type="text" required
+             placeholder="Checkout API latency increased more than 10x">
+    </div>
+    <div class="field">
+      <label for="incident-severity">Severity</label>
+      <select id="incident-severity" name="severity">
+        <option value="SEV-1">SEV-1</option>
+        <option value="SEV-2">SEV-2</option>
+        <option value="SEV-3" selected>SEV-3</option>
+        <option value="SEV-4">SEV-4</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="incident-service">Affected service <span class="hint">(optional)</span></label>
+      <input id="incident-service" name="affected_service" type="text" placeholder="checkout-service">
+    </div>
+    <div class="field">
+      <label for="incident-started">Started at <span class="hint">(optional)</span></label>
+      <input id="incident-started" name="started_at" type="datetime-local">
+      <p class="hint">When the problem began in production. Defaults to now.</p>
+    </div>
+    <div class="field field-wide">
+      <label for="incident-description">Description <span class="hint">(optional)</span></label>
+      <textarea id="incident-description" name="description" rows="4"
+                placeholder="p95 latency went from ~210ms to 2841ms at 14:19 UTC."></textarea>
+    </div>
+  </div>
+  <p class="form-error" id="incident-form-error" hidden></p>
+  <div class="form-actions">
+    <button class="btn btn-ghost" type="button" id="incident-cancel">Cancel</button>
+    <button class="btn btn-primary" type="submit">Create incident</button>
+  </div>
+</form>
+
+<section class="panel">
+  <div class="panel-header">
+    <h2>Incidents</h2>
+  </div>
+  <div id="incident-list" class="loading">Loading…</div>
+</section>
+
+<script id="page-data" type="application/json">{{ {"project_id": project_id} | tojson }}</script>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/incident_table.js') }}"></script>
+<script src="{{ url_for('static', filename='js/project_detail.js') }}"></script>
+{% endblock %}

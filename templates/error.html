@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ code }} · AWS BetterOps Agent</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body class="auth-body">
+  <div class="error-shell">
+    <p class="error-code">{{ code }}</p>
+    <h1>{{ message }}</h1>
+    <p class="lead">That page is not available.</p>
+    <a class="btn btn-primary" href="{{ url_for('pages.index') }}">Back to BetterOps</a>
+  </div>
+</body>
+</html>

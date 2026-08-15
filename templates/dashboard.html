@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · AWS BetterOps Agent{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <div>
+    <h1>Dashboard</h1>
+    <p class="subtitle">Operational overview for your organization.</p>
+  </div>
+</div>
+
+<section class="stat-row" id="stat-row">
+  <article class="stat-card">
+    <span class="stat-label">Open incidents</span>
+    <span class="stat-value" id="stat-open">–</span>
+  </article>
+  <article class="stat-card">
+    <span class="stat-label">Total incidents</span>
+    <span class="stat-value" id="stat-total">–</span>
+  </article>
+  <article class="stat-card">
+    <span class="stat-label">Projects</span>
+    <span class="stat-value" id="stat-projects">–</span>
+  </article>
+  <article class="stat-card">
+    <span class="stat-label">Active investigations</span>
+    <span class="stat-value" id="stat-investigations">–</span>
+    <span class="stat-note">Available in Phase 9</span>
+  </article>
+</section>
+
+<section class="panel">
+  <div class="panel-header">
+    <h2>Recent incidents</h2>
+    <a class="btn btn-ghost" href="{{ url_for('pages.incidents_page') }}">View all</a>
+  </div>
+  <div id="recent-incidents" class="loading">Loading…</div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/incident_table.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
